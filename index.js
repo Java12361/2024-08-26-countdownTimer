@@ -3,7 +3,10 @@ let timer = null;
 let startTime = 0;
 let elapsedTime = 0;
 let isRunning = false;
-const countdownDuration = 5 * 60 * 1000;
+var hr = document.getElementById('hr').textContent;
+var min = document.getElementById('min').textContent;
+var sec = document.getElementById('sec').textContent;
+const countdownDuration = (hr * 60 * 60 * 1000)+(min * 60 * 1000)+(sec * 1000);
 
 function start(){
     /*
@@ -63,3 +66,46 @@ function update(){
     display.textContent = `${hours}:${minutes}:${seconds}`;
     //display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;
 }
+
+function validateInput(element, max) {
+    let content = element.textContent;
+
+    // Remove non-numeric characters
+    content = content.replace(/\D/g, '');
+
+    // Limit to two digits
+    if (content.length > 2) {
+        content = content.slice(0, 2);
+    }
+
+    // Limit the number to the maximum allowed value
+    if (parseInt(content, 10) > max) {
+        content = max.toString().padStart(2, '0');
+    }
+
+    // Update the contenteditable element with the valid content
+    element.textContent = content;
+
+    // Set the cursor position to the end
+    let range = document.createRange();
+    let sel = window.getSelection();
+    range.setStart(element.childNodes[0], content.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+}
+
+// Apply the validation to the hr, min, and sec elements
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('hr').addEventListener('input', function (e) {
+        validateInput(e.target, 24);
+    });
+
+    document.getElementById('min').addEventListener('input', function (e) {
+        validateInput(e.target, 60);
+    });
+
+    document.getElementById('sec').addEventListener('input', function (e) {
+        validateInput(e.target, 60);
+    });
+});
