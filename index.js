@@ -3,9 +3,9 @@ let timer = null;
 let startTime = 0;
 let elapsedTime = 0;
 let isRunning = false;
-var hr = document.getElementById('hr').textContent;
-var min = document.getElementById('min').textContent;
-var sec = document.getElementById('sec').textContent;
+let hr = document.getElementById('hr').textContent;
+let min = document.getElementById('min').textContent;
+let sec = document.getElementById('sec').textContent;
 const countdownDuration = (hr * 60 * 60 * 1000)+(min * 60 * 1000)+(sec * 1000);
 
 function start(){
