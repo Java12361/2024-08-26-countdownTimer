@@ -82,3 +82,12 @@ body {
 #stopBtn:hover {
     background-color: hsl(0, 0%, 30%);
 }
+
+#resetBtn {
+    background-color: hsl(0, 100%, 50%);
+    margin-left: 10px;
+}
+
+#resetBtn:hover {
+    background-color: hsl(0, 100%, 40%);
+}
